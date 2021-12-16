@@ -9,8 +9,8 @@ import { dayRegex, hourRegex, minuteRegex, monthRegex, secondRegex, weekRegex, y
 import DayPane from './DayPane';
 import HourPane from './HourPane';
 import MinutePane from './MinutePane';
-import MonthPane from './MonthPane';
-import SecondPane from './SecondPane';
+import MonthPane from './MonthPane'; // import SecondPane from './SecondPane';
+
 import WeekPane from './WeekPane';
 import YearPane from './YearPane';
 var TabPane = _Tabs.TabPane;
@@ -36,27 +36,27 @@ function Cron(props) {
       value = props.value,
       onOk = props.onOk;
 
-  var _useState = useState('1'),
+  var _useState = useState('2'),
       _useState2 = _slicedToArray(_useState, 2),
       currentTab = _useState2[0],
       setCurrentTab = _useState2[1];
 
-  var _useState3 = useState('*'),
+  var _useState3 = useState('0'),
       _useState4 = _slicedToArray(_useState3, 2),
       second = _useState4[0],
       setSecond = _useState4[1];
 
-  var _useState5 = useState('*'),
+  var _useState5 = useState('0'),
       _useState6 = _slicedToArray(_useState5, 2),
       minute = _useState6[0],
       setMinute = _useState6[1];
 
-  var _useState7 = useState('*'),
+  var _useState7 = useState('0'),
       _useState8 = _slicedToArray(_useState7, 2),
       hour = _useState8[0],
       setHour = _useState8[1];
 
-  var _useState9 = useState('*'),
+  var _useState9 = useState('1'),
       _useState10 = _slicedToArray(_useState9, 2),
       day = _useState10[0],
       setDay = _useState10[1];
@@ -89,10 +89,10 @@ function Cron(props) {
             weekVal = _value$split2[5],
             yearVal = _value$split2[6];
 
-        secondVal = secondRegex.test(secondVal) ? secondVal : '*';
-        minuteValue = minuteRegex.test(minuteValue) ? minuteValue : '*';
-        hourVal = hourRegex.test(hourVal) ? hourVal : '*';
-        dayVal = dayRegex.test(dayVal) ? dayVal : '*';
+        secondVal = secondRegex.test(secondVal) ? secondVal : '0';
+        minuteValue = minuteRegex.test(minuteValue) ? minuteValue : '0';
+        hourVal = hourRegex.test(hourVal) ? hourVal : '0';
+        dayVal = dayRegex.test(dayVal) ? dayVal : '1';
         monthVal = monthRegex.test(monthVal) ? monthVal : '*';
         weekVal = weekRegex.test(weekVal) ? weekVal : '?';
         weekVal = dayVal !== '?' ? '?' : weekVal;
@@ -105,10 +105,10 @@ function Cron(props) {
         setWeek(weekVal);
         setYear(yearVal);
       } catch (error) {
-        setSecond('*');
-        setMinute('*');
-        setHour('*');
-        setDay('*');
+        setSecond('0');
+        setMinute('0');
+        setHour('0');
+        setDay('1');
         setMonth('*');
         setWeek('?');
         setYear('*');
@@ -117,16 +117,16 @@ function Cron(props) {
   };
 
   var onReset = function onReset() {
-    setSecond('*');
-    setMinute('*');
-    setHour('*');
-    setDay('*');
+    setSecond('0');
+    setMinute('0');
+    setHour('0');
+    setDay('1');
     setMonth('*');
     setWeek('?');
     setYear('*');
 
     if (onOk) {
-      onOk(['*', '*', '*', '*', '*', '?', '*'].join(' '));
+      onOk(['0', '0', '0', '1', '*', '?', '*'].join(' '));
     }
   };
 
@@ -183,13 +183,6 @@ function Cron(props) {
     activeKey: currentTab,
     onChange: setCurrentTab
   }, /*#__PURE__*/React.createElement(TabPane, {
-    tab: getTabTitle('秒'),
-    key: "1",
-    style: tabPaneStyle
-  }, /*#__PURE__*/React.createElement(SecondPane, {
-    value: second,
-    onChange: setSecond
-  })), /*#__PURE__*/React.createElement(TabPane, {
     tab: getTabTitle('分'),
     key: "2",
     style: tabPaneStyle

@@ -5,7 +5,7 @@ import DayPane from './DayPane';
 import HourPane from './HourPane';
 import MinutePane from './MinutePane';
 import MonthPane from './MonthPane';
-import SecondPane from './SecondPane';
+// import SecondPane from './SecondPane';
 import WeekPane from './WeekPane';
 import YearPane from './YearPane';
 
@@ -15,11 +15,11 @@ const getTabTitle = (text) => <div style={{ width: 50, textAlign: 'center' }}>{t
 
 function Cron(props) {
     const { style, footerStyle, footerRenderer, value, onOk } = props;
-    const [currentTab, setCurrentTab] = useState('1');
-    const [second, setSecond] = useState('*');
-    const [minute, setMinute] = useState('*');
-    const [hour, setHour] = useState('*');
-    const [day, setDay] = useState('*');
+    const [currentTab, setCurrentTab] = useState('2');
+    const [second, setSecond] = useState('0');
+    const [minute, setMinute] = useState('0');
+    const [hour, setHour] = useState('0');
+    const [day, setDay] = useState('1');
     const [month, setMonth] = useState('*');
     const [week, setWeek] = useState('?');
     const [year, setYear] = useState('*');
@@ -28,10 +28,10 @@ function Cron(props) {
         if (value) {
             try {
                 let [secondVal, minuteValue, hourVal, dayVal, monthVal, weekVal, yearVal] = value.split(' ');
-                secondVal = secondRegex.test(secondVal) ? secondVal : '*';
-                minuteValue = minuteRegex.test(minuteValue) ? minuteValue : '*';
-                hourVal = hourRegex.test(hourVal) ? hourVal : '*';
-                dayVal = dayRegex.test(dayVal) ? dayVal : '*';
+                secondVal = secondRegex.test(secondVal) ? secondVal : '0';
+                minuteValue = minuteRegex.test(minuteValue) ? minuteValue : '0';
+                hourVal = hourRegex.test(hourVal) ? hourVal : '0';
+                dayVal = dayRegex.test(dayVal) ? dayVal : '1';
                 monthVal = monthRegex.test(monthVal) ? monthVal : '*';
                 weekVal = weekRegex.test(weekVal) ? weekVal : '?';
                 weekVal = dayVal !== '?' ? '?' : weekVal;
@@ -44,10 +44,10 @@ function Cron(props) {
                 setWeek(weekVal);
                 setYear(yearVal);
             } catch (error) {
-                setSecond('*');
-                setMinute('*');
-                setHour('*');
-                setDay('*');
+                setSecond('0');
+                setMinute('0');
+                setHour('0');
+                setDay('1');
                 setMonth('*');
                 setWeek('?');
                 setYear('*');
@@ -56,15 +56,15 @@ function Cron(props) {
     };
 
     const onReset = () => {
-        setSecond('*');
-        setMinute('*');
-        setHour('*');
-        setDay('*');
+        setSecond('0');
+        setMinute('0');
+        setHour('0');
+        setDay('1');
         setMonth('*');
         setWeek('?');
         setYear('*');
         if (onOk) {
-            onOk(['*', '*', '*', '*', '*', '?', '*'].join(' '));
+            onOk(['0', '0', '0', '1', '*', '?', '*'].join(' '));
         }
     };
 
@@ -118,9 +118,9 @@ function Cron(props) {
             }}
         >
             <Tabs tabBarGutter={0} animated destroyInactiveTabPane activeKey={currentTab} onChange={setCurrentTab}>
-                <TabPane tab={getTabTitle('秒')} key="1" style={tabPaneStyle}>
+                {/* <TabPane tab={getTabTitle('秒')} key="1" style={tabPaneStyle}>
                     <SecondPane value={second} onChange={setSecond} />
-                </TabPane>
+                </TabPane> */}
                 <TabPane tab={getTabTitle('分')} key="2" style={tabPaneStyle}>
                     <MinutePane value={minute} onChange={setMinute} />
                 </TabPane>
