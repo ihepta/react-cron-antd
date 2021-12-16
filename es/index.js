@@ -138,18 +138,12 @@ function Cron(props) {
 
   var onChangeDay = function onChangeDay(v) {
     setDay(v);
-
-    if (v !== '?') {
-      setWeek('?');
-    }
+    setWeek(v === '?' ? '*' : '?');
   };
 
   var onChangeWeek = function onChangeWeek(v) {
     setWeek(v);
-
-    if (v !== '?') {
-      setDay('?');
-    }
+    setDay(v === '?' ? '*' : '?');
   };
 
   useEffect(onParse, [value]);

@@ -76,16 +76,12 @@ function Cron(props) {
 
     const onChangeDay = (v) => {
         setDay(v);
-        if (v !== '?') {
-            setWeek('?');
-        }
+        setWeek(v === '?' ? '*' : '?');
     };
 
     const onChangeWeek = (v) => {
         setWeek(v);
-        if (v !== '?') {
-            setDay('?');
-        }
+        setDay(v === '?' ? '*' : '?');
     };
 
     useEffect(onParse, [value]);
